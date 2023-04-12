@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# get commit message
+COMMIT_MESSAGE=$(<$1)
+
+# check if version keyword, else prerelease with branch name
+BUMP="prerelease"
+VERSIONS=(major minor patch premajor preminor prepatch prerelease)
+for VERSION in ${VERSIONS[@]}
+do
+  if [[ $COMMIT_MESSAGE =~ "#$VERSION" ]]
+  then
+    BUMP=$VERSION
+    break
+  fi
+done
+
+#invoke npm version, no commit
+if [[ $BUMP == "prerelease" ]]
+then
+  PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
+  npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false
+else
+  npm version $BUMP --commit-hooks false --git-tag-version false
+fi
+

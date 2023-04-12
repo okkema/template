@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# only run if pre-commit hook ran
+if [ -e .commit ]
+then
+  # clean up temp file
+  rm .commit
+  
+  # amend versioned package files
+  git add package.json package-lock.json
+  git commit --amend -C HEAD --no-verify
+fi
+
