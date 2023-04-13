@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# only run if pre-commit hook ran
+if [ -e .commit ]
+then
+  # get tag and clean up temp file
+  TAG=$(cat .commit)
+  rm .commit
+
+  # amend versioned package files
+  git add package.json package-lock.json
+  git commit --amend -C HEAD --no-verify
+
+  # tag commit
+  git tag -a -m "$(git log -1 --pretty=format:%B)" $TAG
+fi
+

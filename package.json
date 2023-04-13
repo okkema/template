@@ -1,0 +1,25 @@
+{
+  "name": "template",
+  "version": "0.1.0",
+  "description": "Okkema Labs Javascript Template",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "git config core.hooksPath .githooks",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okkema/template.git"
+  },
+  "keywords": [
+    "okkema",
+    "template",
+    "javascript"
+  ],
+  "author": "Okkema Labs <correos@okkema.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okkema/template/issues"
+  },
+  "homepage": "https://github.com/okkema/template#readme"
+}
