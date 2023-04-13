@@ -15,12 +15,17 @@ do
   fi
 done
 
-#invoke npm version, no commit
+# invoke npm version and tag
 if [[ $BUMP == "prerelease" ]]
 then
   PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
-  npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false
+  TAG=$(npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false)
 else
-  npm version $BUMP --commit-hooks false --git-tag-version false
+  TAG=$(npm version $BUMP --commit-hooks false --git-tag-version false)
 fi
 
+# pass tag to post-commit
+if [ -e .commit ]
+then
+  echo $TAG >> .commit
+fi
