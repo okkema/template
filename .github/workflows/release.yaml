@@ -25,8 +25,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          release_name: ${{ github.ref }}
           body: |
             ${{ steps.commit-message.outputs.body }}
           draft: false
-          prerelease: ${{ steps.version.outputs.prerelease }}
+          prerelease: ${{ steps.version.outputs.prerelease == "true" && true || false }}
