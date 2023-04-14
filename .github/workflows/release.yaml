@@ -1,0 +1,32 @@
+name: release
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  create-release:
+    name: Create release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Get commit message
+        run: |
+          echo ::set-output name=body::"$(git log -1 --pretty=format:%B)"
+        id: commit-message
+      - name: Check if prerelease
+        run: |
+          [[ "$(git describe --abbrev=0)" =~ \- ]] && PRERELEASE="true" || PRERELEASE="false"
+          echo ::set-output name=prerelease::"$PRERELEASE"
+        id: version
+      - name: Create release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ${{ steps.commit-message.outputs.body }}
+          draft: false
+          prerelease: ${{ steps.version.outputs.prerelease }}
