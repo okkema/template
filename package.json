@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "0.2.1-feature-7-release-workflow.2",
+  "version": "0.2.1-feature-7-release-workflow.3",
   "description": "Okkema Labs Javascript Template",
   "main": "index.js",
   "scripts": {
