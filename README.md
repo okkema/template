@@ -9,5 +9,5 @@ JavaScript template repository for Okkema Labs. Uses [githooks](https://git-scm.
   - Add issues to Okkema Labs project
 
 ## Versioning
-Versions are automatically incremented using [githooks](./.githooks) following [Semantic Versioning](https://semver.org/). Every commit will increment the version, `prerelease` by default. The version can be set by including "#<VERSION>" in the commit message, e.g. "Some feature #minor". See [npm version](https://docs.npmjs.com/cli/v9/commands/npm-version) for more details.
+Versions are automatically incremented using [/.githooks](./.githooks) following [Semantic Versioning](https://semver.org/). Every commit will increment the version, `prerelease` by default. The version can be set by including `"#<VERSION>"` in the commit message, e.g. `"Some feature #minor"`. See [npm version](https://docs.npmjs.com/cli/v9/commands/npm-version) for more details.
 
