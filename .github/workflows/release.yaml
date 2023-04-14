@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Get commit message
         run: |
           echo ::set-output name=body::"$(git log -1 --pretty=format:%B)"
