@@ -16,12 +16,31 @@ do
 done
 
 # invoke npm version and tag
-if [[ $BUMP == "prerelease" ]]
+if [[ $BUMP =~ "^pre.*" ]]
 then
   PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
   TAG=$(npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false)
 else
+  # commit must include changelog
+  if ! grep --quiet CHANGELOG.md <(git diff --cached --name-only)
+  then
+    echo "ERROR - Commit failed"
+    echo "Changelog must be included with version bump."
+    exit 1
+  fi
+
+  # changelog must match version
   TAG=$(npm version $BUMP --commit-hooks false --git-tag-version false)
+  CHANGELOG=$(head -n 1 CHANGELOG.md)
+  if ! [[ $CHANGELOG =~ "${TAG:1}" ]]
+  then
+    echo "ERROR - Commit failed"
+    echo "Changelog does not match next $BUMP version."
+    echo "Changelog:    ${CHANGELOG:2}"
+    echo "Next version: ${TAG:1}"
+    git restore package.json package-lock.json
+    exit 1
+  fi
 fi
 
 # pass tag to post-commit
