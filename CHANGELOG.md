@@ -1,3 +1,6 @@
+# 0.4.0
+- [#15](https://github.com/okkema/template/issues/15) Require changelog with PR
+
 # 0.3.1
 - [#6](https://github.com/okkema/template/issues/6) Fix terraform trigger
 
