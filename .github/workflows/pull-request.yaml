@@ -1,0 +1,9 @@
+name: pull-request
+on:
+  pull_request:
+jobs:
+  pull-request:
+    name: Pull request requires changelog
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
