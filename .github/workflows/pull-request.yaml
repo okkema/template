@@ -13,7 +13,7 @@ jobs:
       - run: git branch
       - name: Check that changelog updated
         run: |
-          git diff --name-only $HEAD_SHA $(git merge-base $HEAD_SHA $GITHUB_SHA)
+          git diff --name-only $GITHUB_SHA $(git merge-base $GITHUB_SHA $HEAD_SHA)
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
 
