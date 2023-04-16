@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - name: Check that changelog updated
         run: |
-          if ! grep --quiet CHANGELOG.md <(git diff --name-only $GITHUB_SHA $(git merge-base $GITHUB_SHA main))
+          if ! grep --quiet CHANGELOG.md <(git diff --name-only $GITHUB_REF $(git merge-base $GITHUB_REF main))
           then
             echo "ERROR - Commit failed"
             echo "Changelog must be included with pull request."
