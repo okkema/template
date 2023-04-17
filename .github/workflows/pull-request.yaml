@@ -15,7 +15,7 @@ jobs:
         uses: tj-actions/changed-files@v35
       - name: Check that changelog updated
         run: |
-          if ! grep --quiet CHANGELOG.md <(${{ steps.changed-files.outputs.all_changed_files }})
+          if ! grep --quiet CHANGELOG.md <(echo "${{ steps.changed-files.outputs.all_changed_files }}")
           then
             echo "ERROR - Commit failed"
             echo "Changelog must be included with version bump."
