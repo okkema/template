@@ -16,7 +16,7 @@ do
 done
 
 # invoke npm version and tag
-if [[ $BUMP =~ "^pre.*" ]]
+if [[ $BUMP =~ "pre" ]]
 then
   PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
   TAG=$(npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false)
