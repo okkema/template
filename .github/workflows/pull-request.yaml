@@ -2,7 +2,7 @@ name: pull-request
 on:
   pull_request:
 jobs:
-  pull-request:
+  require-changelog:
     name: Pull request requires changelog
     runs-on: ubuntu-latest
     steps:
@@ -17,7 +17,30 @@ jobs:
         run: |
           if ! grep --quiet CHANGELOG.md <(echo "${{ steps.changed-files.outputs.all_changed_files }}")
           then
-            echo "ERROR - Commit failed"
-            echo "Changelog must be included with version bump."
+            echo "ERROR - Pull request check failed"
+            echo "Changelog must be included in pull request."
+            exit 1
+          fi
+  require-bump:
+    name: Pull request title requires version bump
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check that title contains bump
+        run: |
+          VERSIONS=(major minor patch)
+          for VERSION in ${VERSIONS[@]}
+          do
+            if [[ "${{ github.event.pull_request.title }}" =~ "#$VERSION" ]]
+            then
+              BUMP=$VERSION
+              break
+            fi
+          done
+          if [ -z "$BUMP" ]
+          then
+            echo "ERROR - Pull request check failed"
+            echo "Pull request title must contain version bump."
+            echo "Values:  major,minor,patch"
+            echo "Example: \"Some new feature #minor\""
             exit 1
           fi
