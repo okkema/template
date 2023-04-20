@@ -1,23 +1,23 @@
-name: pull-request
 on:
   pull_request:
+    types: [ closed ]
+    branches: [ main ]
 jobs:
-  pull-request:
-    name: Pull request requires changelog
+  merge_job:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v35
-      - name: Check that changelog updated
-        run: |
-          if ! grep --quiet CHANGELOG.md <(echo "${{ steps.changed-files.outputs.all_changed_files }}")
+    - name: Bump version on pull request merge
+      run: |
+        COMMIT_MESSAGE=$(git log -1 --pretty=format:%B)
+        VERSIONS=(major minor patch)
+        for VERSION in ${VERSIONS[@]}
+        do
+          if [[ "$COMMIT_MESSAGE" =~ "#$VERSION" ]]
           then
-            echo "ERROR - Commit failed"
-            echo "Changelog must be included with version bump."
-            exit 1
+            BUMP=$VERSION
+            break
           fi
+        done
+        npm version $BUMP --commit-hooks false 
+        git push
