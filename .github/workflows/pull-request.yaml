@@ -3,10 +3,14 @@ on:
     types: [ closed ]
     branches: [ main ]
 jobs:
-  merge_job:
+  bump-version:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Bump version on pull request merge
       run: |
         COMMIT_MESSAGE=$(git log -1 --pretty=format:%B)
