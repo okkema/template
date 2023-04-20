@@ -1,7 +1,8 @@
 # 0.5.0
 - [#18](https://github.com/okkema/template/issues/18) Require version bump in PR title
 - [#19](https://github.com/okkema/template/issues/19) Require version bump to match changelog
-- [#21](https://github.com/okkema/template/issues/21) Fix pull request merge workflow
+- [#23](https://github.com/okkema/template/issues/23) Fix pull request merge workflow
+- [#25](https://github.com/okkema/template/issues/25) Add git identity to pull request workflow
 
 # 0.4.0
 - [#15](https://github.com/okkema/template/issues/15) Require changelog with PR

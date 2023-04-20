@@ -1,3 +1,4 @@
+name: pull-request-merged
 on:
   pull_request:
     types: [ closed ]
@@ -13,6 +14,8 @@ jobs:
         fetch-depth: 0
     - name: Bump version on pull request merge
       run: |
+        git config --global user.email "correos@okkema.org"
+        git config --global user.name "Okkema Labs"
         COMMIT_MESSAGE=$(git log -1 --pretty=format:%B)
         VERSIONS=(major minor patch)
         for VERSION in ${VERSIONS[@]}
