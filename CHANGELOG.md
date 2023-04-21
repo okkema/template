@@ -1,3 +1,6 @@
+# 0.6.1
+- [#31](https://github.com/okkema/template/issues/31) Push tags on version bump
+
 # 0.6.0
 - [#28](https://github.com/okkema/template/issues/28) Add github actions bot
 

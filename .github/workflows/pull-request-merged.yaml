@@ -28,4 +28,4 @@ jobs:
           fi
         done
         npm version $BUMP --commit-hooks false 
-        git push
+        git push --follow tags
