@@ -1,7 +1,7 @@
 locals {
   secrets = {
     "TF_API_TOKEN" : var.TF_API_TOKEN,
-    "WORKFLOW_ISSUES_TOKEN": var.WORKFLOW_ISSUES_TOKEN
+    "ACTIONS_GITHUB_TOKEN": var.ACTIONS_GITHUB_TOKEN
   }
 }
 

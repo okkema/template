@@ -1,3 +1,6 @@
+# 0.6.0
+- [#28](https://github.com/okkema/template/issues/28) Add github actions bot
+
 # 0.5.0
 - [#18](https://github.com/okkema/template/issues/18) Require version bump in PR title
 - [#19](https://github.com/okkema/template/issues/19) Require version bump to match changelog

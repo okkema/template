@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "0.5.0",
+  "version": "0.5.1-bugfix-actions-bot.3",
   "description": "Okkema Labs Javascript Template",
   "main": "index.js",
   "scripts": {

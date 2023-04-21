@@ -11,4 +11,4 @@ jobs:
       - uses: actions/add-to-project@v0.4.1
         with:
           project-url: https://github.com/orgs/okkema/projects/1
-          github-token: ${{ secrets.WORKFLOW_ISSUES_TOKEN }}
+          github-token: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
