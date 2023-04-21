@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "0.6.0",
+  "version": "0.6.1-bugfix-push-tags.1",
   "description": "Okkema Labs Javascript Template",
   "main": "index.js",
   "scripts": {
