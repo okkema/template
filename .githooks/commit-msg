@@ -3,6 +3,30 @@
 # get commit message
 COMMIT_MESSAGE=$(<$1)
 
+# verify message starts with prefix
+PREFIXES=(feat fix chore build ci docs refactor style)
+for PREFIX in ${PREFIXES[@]}
+do
+  if [[ $COMMIT_MESSAGE == $PREFIX:* ]]
+  then
+    VALID=true
+  fi
+done
+if [ -z $VALID ]
+then
+  echo "ERROR - Commit failed"
+  echo "Commit message must begin with a valid prefix."
+  echo "feat:      New features"
+  echo "fix:       Bug and hot fixes"
+  echo "docs:      Docs only"
+  echo "build:     Build tools, e.g. npm and git"
+  echo "ci:        CI/CD, e.g. workflows and terraform"
+  echo "style:     Linting and formatting"
+  echo "chore:     Automated tasks, e.g. version bumps"
+  echo "refactor:  Other code change"
+  exit 1
+fi
+
 # check if version keyword, else prerelease with branch name
 BUMP="prerelease"
 VERSIONS=(major minor patch premajor preminor prepatch prerelease)
