@@ -1,5 +1,6 @@
 # 1.0.0
 - [#30](https://github.com/okkema/template/issues/30) Require commit prefix
+- [#38](https://github.com/okkema/template/issues/38) Enforce branch name schema
 
 # 0.6.1
 - [#31](https://github.com/okkema/template/issues/31) Push tags on version bump
