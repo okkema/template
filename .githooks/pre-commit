@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# create temp file for post-commit
-touch .commit
-
 # check that npm installed
 if ! command -v npm &> /dev/null
 then
@@ -10,3 +7,6 @@ then
     echo "npm could not be found."
     exit 1
 fi
+
+# create temp file for post-commit
+touch .commit
