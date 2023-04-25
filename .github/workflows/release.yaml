@@ -14,11 +14,16 @@ jobs:
           fetch-depth: 0
       - name: Get commit message
         run: |
-          echo "body=$(git log -1 --pretty=format:%B)" >> "$GITHUB_OUTPUT"
+          BODY=$(git log -1 --pretty=format:%B)
+          echo "$BODY"
+          echo "body=$BODY" >> "$GITHUB_OUTPUT"
         id: commit-message
       - name: Check if prerelease
         run: |
-          [[ "$(git describe --abbrev=0)" =~ \- ]] && PRERELEASE="true" || PRERELEASE="false"
+          TAG=$(git describe --abbrev=0)
+          echo "$TAG"
+          [[ "$TAG" =~ \- ]] && PRERELEASE="true" || PRERELEASE="false"
+          echo "$PRERELEASE"
           echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
         id: version
       - name: Create release

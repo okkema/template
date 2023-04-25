@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "1.0.0-epic-1-v1.2",
+  "version": "1.0.0-epic-1-v1.3",
   "description": "Okkema Labs Javascript Template",
   "main": "index.js",
   "scripts": {
