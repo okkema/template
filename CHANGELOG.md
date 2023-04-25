@@ -1,3 +1,6 @@
+# 0.6.2
+- [#43](https://github.com/okkema/template/issues/43) Create git tag with version bump
+
 # 0.6.1
 - [#31](https://github.com/okkema/template/issues/31) Push tags on version bump
 
