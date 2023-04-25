@@ -19,6 +19,7 @@ then
   echo "Commit message must begin with a valid prefix."
   echo "feat:      New features"
   echo "fix:       Bug and hot fixes"
+  echo "test:      Tests only"
   echo "docs:      Docs only"
   echo "build:     Build tools, e.g. npm and git"
   echo "ci:        CI/CD, e.g. workflows and terraform"
