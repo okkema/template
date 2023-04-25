@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# create temp file for post-commit
-touch .commit
-
 # check that npm installed
 if ! command -v npm &> /dev/null
 then
@@ -10,3 +7,19 @@ then
     echo "npm could not be found."
     exit 1
 fi
+
+# require branch names to follow schema
+BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
+BRANCH_REGEX="^(epic\/[0-9]+\/[0-9a-z\-]+|topic\/[0-9]+\/[0-9a-z\-]+|main)$"
+if [[ ! $BRANCH_NAME =~ $BRANCH_REGEX ]]
+then
+  echo "ERROR - Commit failed"
+  echo "Branch name does not match schema."
+  echo " - main"
+  echo " - epic/<milestone>/new-version"
+  echo " - topic/<issue>/some-bug-or-feature"
+  exit 1
+fi
+
+# create temp file for post-commit
+touch .commit

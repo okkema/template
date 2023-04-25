@@ -65,9 +65,40 @@ jobs:
           CHANGELOG=$(head -n 1 CHANGELOG.md)
           if ! [[ $CHANGELOG =~ "${TAG:1}" ]]
           then
-            echo "ERROR - Commit failed"
+            echo "ERROR - Pull request check failed"
             echo "Changelog does not match next $BUMP version."
             echo "Changelog:    ${CHANGELOG:2}"
             echo "Next version: ${TAG:1}"
             exit 1
           fi
+  require-prefix:
+    name: Pull request title requires prefix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check that title contains prefix
+        run: |
+          PREFIXES=(feat fix chore build ci docs refactor style test)
+          for PREFIX in ${PREFIXES[@]}
+          do
+            if [[ "${{ github.event.pull_request.title }}" == $PREFIX:* ]]
+            then
+              VALID=true
+            fi
+          done
+          if [ -z $VALID ]
+          then
+            rm .commit
+            echo "ERROR - Pull request check failed"
+            echo "Pull request title must begin with a valid prefix."
+            echo "feat:      New features"
+            echo "fix:       Bug and hot fixes"
+            echo "test:      Tests only"
+            echo "docs:      Docs only"
+            echo "build:     Build tools, e.g. npm and git"
+            echo "ci:        CI/CD, e.g. workflows and terraform"
+            echo "style:     Linting and formatting"
+            echo "chore:     Automated tasks, e.g. version bumps"
+            echo "refactor:  Other code change"
+            exit 1
+          fi
+          

@@ -1,3 +1,11 @@
+# 1.0.0
+- [#30](https://github.com/okkema/template/issues/30) Require commit prefix
+- [#38](https://github.com/okkema/template/issues/38) Enforce branch name schema
+- [#34](https://github.com/okkema/template/issues/34) Require prefix in PR title
+- [#44](https://github.com/okkema/template/issues/44) Bump checkout to v3
+- [#42](https://github.com/okkema/template/issues/42) Switch set-output for env vars
+- [#27](https://github.com/okkema/template/issues/27) Fix release workflow for non prereleases
+
 # 0.6.2
 - [#43](https://github.com/okkema/template/issues/43) Create git tag with version bump
 

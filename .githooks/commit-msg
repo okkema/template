@@ -3,9 +3,35 @@
 # get commit message
 COMMIT_MESSAGE=$(<$1)
 
+# verify message starts with prefix
+PREFIXES=(feat fix chore build ci docs refactor style test)
+for PREFIX in ${PREFIXES[@]}
+do
+  if [[ $COMMIT_MESSAGE == $PREFIX:* ]]
+  then
+    VALID=true
+  fi
+done
+if [ -z $VALID ]
+then
+  rm .commit
+  echo "ERROR - Commit failed"
+  echo "Commit message must begin with a valid prefix."
+  echo "feat:      New features"
+  echo "fix:       Bug and hot fixes"
+  echo "test:      Tests only"
+  echo "docs:      Docs only"
+  echo "build:     Build tools, e.g. npm and git"
+  echo "ci:        CI/CD, e.g. workflows and terraform"
+  echo "style:     Linting and formatting"
+  echo "chore:     Automated tasks, e.g. version bumps"
+  echo "refactor:  Other code change"
+  exit 1
+fi
+
 # check if version keyword, else prerelease with branch name
 BUMP="prerelease"
-VERSIONS=(major minor patch premajor preminor prepatch prerelease)
+VERSIONS=(premajor preminor prepatch prerelease)
 for VERSION in ${VERSIONS[@]}
 do
   if [[ $COMMIT_MESSAGE =~ "#$VERSION" ]]
@@ -16,32 +42,8 @@ do
 done
 
 # invoke npm version and tag
-if [[ $BUMP =~ "pre" ]]
-then
-  PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
-  TAG=$(npm version $BUMP --preid $PREID --commit-hooks false --git-tag-version false)
-else
-  # commit must include changelog
-  if ! grep --quiet CHANGELOG.md <(git diff --cached --name-only)
-  then
-    echo "ERROR - Commit failed"
-    echo "Changelog must be included with version bump."
-    exit 1
-  fi
-
-  # changelog must match version
-  TAG=$(npm version $BUMP --commit-hooks false --git-tag-version false)
-  CHANGELOG=$(head -n 1 CHANGELOG.md)
-  if ! [[ $CHANGELOG =~ "${TAG:1}" ]]
-  then
-    echo "ERROR - Commit failed"
-    echo "Changelog does not match next $BUMP version."
-    echo "Changelog:    ${CHANGELOG:2}"
-    echo "Next version: ${TAG:1}"
-    git restore package.json package-lock.json
-    exit 1
-  fi
-fi
+PREID=$(git rev-parse --abbrev-ref HEAD | sed -E 's/[^[:alnum:][:space:]]+/-/g')
+TAG=$(npm version $BUMP --preid $PREID --git-tag-version false)
 
 # pass tag to post-commit
 if [ -e .commit ]
