@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "0.6.2-topic-27-prerelease-fix.0",
+  "version": "1.0.1-topic-27-prerelease-fix.0",
   "description": "Okkema Labs Javascript Template",
   "main": "index.js",
   "scripts": {
