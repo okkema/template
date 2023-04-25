@@ -6,6 +6,9 @@
 - [#42](https://github.com/okkema/template/issues/42) Switch set-output for env vars
 - [#27](https://github.com/okkema/template/issues/27) Fix release workflow for non prereleases
 
+# 0.6.2
+- [#43](https://github.com/okkema/template/issues/43) Create git tag with version bump
+
 # 0.6.1
 - [#31](https://github.com/okkema/template/issues/31) Push tags on version bump
 

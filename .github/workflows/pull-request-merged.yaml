@@ -30,4 +30,5 @@ jobs:
         TAG=$(npm version $BUMP --commit-hooks false --git-tag-version false)
         git add package.json package-lock.json
         git commit -m "chore: $BUMP version bump - $TAG"
+        git tag -a -m "$(git log -1 --pretty=format:%B)" $TAG
         git push --follow-tags
