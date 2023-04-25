@@ -3,6 +3,7 @@
 - [#38](https://github.com/okkema/template/issues/38) Enforce branch name schema
 - [#34](https://github.com/okkema/template/issues/34) Require prefix in PR title
 - [#44](https://github.com/okkema/template/issues/44) Bump checkout to v3
+- [#42](https://github.com/okkema/template/issues/42) Switch set-output for env vars
 
 # 0.6.1
 - [#31](https://github.com/okkema/template/issues/31) Push tags on version bump

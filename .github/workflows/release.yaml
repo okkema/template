@@ -14,12 +14,12 @@ jobs:
           fetch-depth: 0
       - name: Get commit message
         run: |
-          echo ::set-output name=body::"$(git log -1 --pretty=format:%B)"
+          echo "body=$(git log -1 --pretty=format:%B)" >> "$GITHUB_OUTPUT"
         id: commit-message
       - name: Check if prerelease
         run: |
           [[ "$(git describe --abbrev=0)" =~ \- ]] && PRERELEASE="true" || PRERELEASE="false"
-          echo ::set-output name=prerelease::"$PRERELEASE"
+          echo "prerelease=$PRERELEASE" >> "$GITHUB_OUTPUT"
         id: version
       - name: Create release
         uses: actions/create-release@latest
