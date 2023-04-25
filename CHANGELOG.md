@@ -1,3 +1,6 @@
+# 0.6.2
+- [#27](https://github.com/okkema/template/issues/27) Fix release workflow for non prerelease
+
 # 0.6.1
 - [#31](https://github.com/okkema/template/issues/31) Push tags on version bump
 
