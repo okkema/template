@@ -4,7 +4,7 @@
 COMMIT_MESSAGE=$(<$1)
 
 # verify message starts with prefix
-PREFIXES=(feat fix chore build ci docs refactor style)
+PREFIXES=(feat fix chore build ci docs refactor style test)
 for PREFIX in ${PREFIXES[@]}
 do
   if [[ $COMMIT_MESSAGE == $PREFIX:* ]]

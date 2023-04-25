@@ -77,7 +77,7 @@ jobs:
     steps:
       - name: Check that title contains prefix
         run: |
-          PREFIXES=(feat fix chore build ci docs refactor style)
+          PREFIXES=(feat fix chore build ci docs refactor style test)
           for PREFIX in ${PREFIXES[@]}
           do
             if [[ "${{ github.event.pull_request.title }}" == $PREFIX:* ]]
